@@ -2,16 +2,16 @@ package model;
 
 import java.util.Objects;
 
-public class Currencies {
+public class Currency {
     private String id;
     private String nameOfCurrency;
     private String abbreviation;
 
-    public static final Currencies EUR = new Currencies("1", "Euro", "EUR");
-    public static final Currencies USD = new Currencies("2", "Dollar", "USD");
-    public static final Currencies UAH = new Currencies("3", "Hryvnia", "UAH");
+    public static final Currency EUR = new Currency("1", "Euro", "EUR");
+    public static final Currency USD = new Currency("2", "Dollar", "USD");
+    public static final Currency UAH = new Currency("3", "Hryvnia", "UAH");
 
-    public Currencies(String id, String nameOfCurrency, String abbreviation) {
+    public Currency(String id, String nameOfCurrency, String abbreviation) {
         this.id = id;
         this.nameOfCurrency = nameOfCurrency;
         this.abbreviation = abbreviation;
@@ -31,7 +31,7 @@ public class Currencies {
 
     @Override
     public String toString() {
-        return "Currencies{" +
+        return "Currency{" +
                 "id='" + id + '\'' +
                 ", nameOfCurrency='" + nameOfCurrency + '\'' +
                 ", abbreviation='" + abbreviation + '\'' +
@@ -42,7 +42,7 @@ public class Currencies {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Currencies that = (Currencies) o;
+        Currency that = (Currency) o;
         return Objects.equals(id, that.id) && Objects.equals(nameOfCurrency, that.nameOfCurrency) && Objects.equals(abbreviation, that.abbreviation);
     }
 
