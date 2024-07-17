@@ -1,5 +1,6 @@
 package model;
 
+
 import java.util.Objects;
 
 public class Currency {
@@ -51,4 +52,4 @@ public class Currency {
         return Objects.hash(id, nameOfCurrency, abbreviation);
     }
 
-}
+
