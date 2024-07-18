@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Currency {
     private String id;
     private String nameOfCurrency;
-    private String abbreviation;
+    private String abbreviation;//code
 
     public static final Currency EUR = new Currency("1", "Euro", "EUR");
     public static final Currency USD = new Currency("2", "Dollar", "USD");

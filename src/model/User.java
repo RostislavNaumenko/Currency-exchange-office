@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class User {
+    private Integer id;
     private String email;
     private String password;
     private Role role;

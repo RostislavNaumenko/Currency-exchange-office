@@ -7,5 +7,6 @@ import java.util.Map;
 
 public class TransactionRepository {
     // Map для хранения транзакций: ключ - ID транзакции, значение - объект Transaction
-    private Map<String, Transaction> transactionsMap = new HashMap<>();
+    private Map<Integer, Transaction> transactionsMap = new HashMap<>();
+    //можно лист
 }
