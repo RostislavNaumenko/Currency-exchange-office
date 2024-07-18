@@ -1,15 +1,34 @@
 package model;
 
 public class Account {
-    private String accountId;
-    private double balance;
-    //Помощь Сергея
-    private Currency currency;
-    private User user;
 
-    public Account(String accountId, double balance) {
-        this.accountId = accountId;
+    private String id;
+    private User user;
+    private double balance;
+    private Currency currency;
+
+    public Account(String id, User user, double balance, Currency currency) {
+        this.id = id;
+        this.user = user;
         this.balance = balance;
+        this.currency = currency;
+    }
+
+    // Getters and setters
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public double getBalance() {
@@ -20,15 +39,21 @@ public class Account {
         this.balance = balance;
     }
 
-    public String getAccountId() {
-        return accountId;
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 
     @Override
     public String toString() {
         return "Account{" +
-                "accountId='" + accountId + '\'' +
+                "id='" + id + '\'' +
+                ", user=" + user +
                 ", balance=" + balance +
+                ", currency=" + currency +
                 '}';
     }
 }
