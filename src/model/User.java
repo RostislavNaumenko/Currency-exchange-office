@@ -4,19 +4,24 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class User {
-    private Integer id;
+    private final int userId;
     private String email;
     private String password;
     private Role role;
     private String name;
     private String surname;
 
-    public User(String email, String password, Role role, String name, String surname) {
+    public User(Integer userId, String email, String password, Role role, String name, String surname) {
+        this.userId = userId;
         this.email = email;
         this.password = password;
         this.role = role;
         this.name = name;
         this.surname = surname;
+    }
+
+    public Integer getId() {
+        return userId;
     }
 
     public String getEmail() {
@@ -63,11 +68,11 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(email, user.email) && Objects.equals(password, user.password) && role == user.role && Objects.equals(name, user.name) && Objects.equals(surname, user.surname);
+        return userId == user.userId && Objects.equals(email, user.email) && Objects.equals(password, user.password) && role == user.role && Objects.equals(name, user.name) && Objects.equals(surname, user.surname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, password, role, name, surname);
+        return Objects.hash(userId, email, password, role, name, surname);
     }
 }
