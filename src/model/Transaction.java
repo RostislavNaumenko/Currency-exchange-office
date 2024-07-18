@@ -7,9 +7,9 @@ public class Transaction {
     private Account account;
     private double amount;
     private LocalDateTime timestamp;
-    private String type; // DEBIT or CREDIT
+    private TransactionType type; // DEBIT or CREDIT
 
-    public Transaction(String id, Account account, double amount, LocalDateTime timestamp, String type) {
+    public Transaction(String id, Account account, double amount, LocalDateTime timestamp, TransactionType type) {
         this.id = id;
         this.account = account;
         this.amount = amount;
@@ -50,11 +50,11 @@ public class Transaction {
         this.timestamp = timestamp;
     }
 
-    public String getType() {
+    public TransactionType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(TransactionType type) {
         this.type = type;
     }
 
