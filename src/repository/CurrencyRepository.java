@@ -6,20 +6,18 @@ import model.Rate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CurrencyRepository {
     // Map для хранения текущего курса валют: ключ - код валюты, значение - объект Rate
     Map<String, Rate> currenciesRate;
     // Map для хранения валют: ключ - code валюты, значение - объект Currency
-    Map<String, Currency>  currenciesMap;
+    Map<String, Currency> currenciesMap;
     // Map для хранения истории курсов валют: ключ - код валюты, значение - список курсов (Rate) для данной валюты
     Map<String, List<Rate>> history;
 
-    public CurrencyRepository(Map<String, Rate> currenciesRate, Map<String, Currency> currenciesMap, Map<String, List<Rate>> history) {
-        this.currenciesRate = currenciesRate;
-        this.currenciesMap = currenciesMap;
-        this.history = history;
-    }
+    // генерация ID для валют
+    private final AtomicInteger currencyIdCounter = new AtomicInteger(1);
 
     public Map<String, Rate> getCurrenciesRate() {
         return currenciesRate;
@@ -33,15 +31,26 @@ public class CurrencyRepository {
         return history;
     }
 
-    // добавления валюты
-    public void addCurrency(Currency currency) {
-        currenciesMap.put(currency.getCode(), currency);
+    public void addCurrency(String nameOfCurrency, String code) {
+        int id = currencyIdCounter.getAndIncrement();
+        Currency currency = new Currency(String.valueOf(id), nameOfCurrency, code);
+        currenciesMap.put(code, currency);
     }
 
-    // обновления текущего курса
-    public void updateRate(String currencyCode, Rate rate) {
-        currenciesRate.put(currencyCode, rate);
-        history.computeIfAbsent(currencyCode, k -> new ArrayList<>()).add(rate);
+    public void updateRate(String currencyCode, double rateValue) {
+        Currency currency = currenciesMap.get(currencyCode);
+        if (currency != null) {
+            Rate rate = new Rate(currency, rateValue);
+            currenciesRate.put(currencyCode, rate);
+            history.compute(currencyCode, (k, v) -> {
+                if (v == null) {
+                    v = new ArrayList<>();
+                }
+                v.add(rate);
+                return v;
+            });
+        } else {
+            System.out.println("Валюта не найдена: " + currencyCode);
+        }
     }
 }
-

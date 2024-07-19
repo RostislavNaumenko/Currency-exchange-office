@@ -3,26 +3,17 @@ package model;
 import java.util.Objects;
 
 public class Rate {
-    private String id;
+
     private Currency currency;
     private double rate;
 
-    public Rate(String id, Currency currency, double rate) {
-        this.id = id;
+    public Rate(Currency currency, double rate) {
+
         this.currency = currency;
         this.rate = rate;
     }
 
-    // Getters and setters
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Currency getCurrency() {
+      public Currency getCurrency() {
         return currency;
     }
 
@@ -41,7 +32,6 @@ public class Rate {
     @Override
     public String toString() {
         return "Rate{" +
-                "id='" + id + '\'' +
                 ", currency=" + currency +
                 ", rate=" + rate +
                 '}';
@@ -52,11 +42,11 @@ public class Rate {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Rate rate1 = (Rate) o;
-        return Double.compare(rate, rate1.rate) == 0 && Objects.equals(id, rate1.id) && Objects.equals(currency, rate1.currency);
+        return Double.compare(rate, rate1.rate) == 0 && Objects.equals(currency, rate1.currency);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, currency, rate);
+        return Objects.hash(currency, rate);
     }
 }
