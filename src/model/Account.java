@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class Account {
 
     private String id;
@@ -55,5 +57,18 @@ public class Account {
                 ", balance=" + balance +
                 ", currency=" + currency +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Account account = (Account) o;
+        return Double.compare(balance, account.balance) == 0 && Objects.equals(id, account.id) && Objects.equals(user, account.user) && Objects.equals(currency, account.currency);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, user, balance, currency);
     }
 }

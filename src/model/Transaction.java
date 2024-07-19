@@ -1,30 +1,30 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Transaction {
-    private String id;
+    private Integer id;
     private Account account;
     private double amount;
     private LocalDateTime timestamp;
-    private String type; // DEBIT or CREDIT
+    private TransactionType type; // DEBIT or CREDIT
+    private Currency currency;  // Добавлено поле валюты
 
-    public Transaction(String id, Account account, double amount, LocalDateTime timestamp, String type) {
+    public Transaction(Integer id, Account account, double amount, LocalDateTime timestamp, TransactionType type, Currency currency) {
         this.id = id;
         this.account = account;
         this.amount = amount;
         this.timestamp = timestamp;
         this.type = type;
+        this.currency = currency;
     }
 
-    // Getters and setters
-    public String getId() {
+    // Getters and Setters
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public Account getAccount() {
         return account;
@@ -50,12 +50,20 @@ public class Transaction {
         this.timestamp = timestamp;
     }
 
-    public String getType() {
+    public TransactionType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(TransactionType type) {
         this.type = type;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 
     @Override
@@ -65,7 +73,20 @@ public class Transaction {
                 ", account=" + account +
                 ", amount=" + amount +
                 ", timestamp=" + timestamp +
-                ", type='" + type + '\'' +
+                ", type=" + type +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transaction that = (Transaction) o;
+        return Double.compare(amount, that.amount) == 0 && Objects.equals(id, that.id) && Objects.equals(account, that.account) && Objects.equals(timestamp, that.timestamp) && type == that.type && Objects.equals(currency, that.currency);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, account, amount, timestamp, type, currency);
     }
 }
