@@ -27,6 +27,7 @@ public class AccountRepository {
             userAccountsMap.put(userId, accounts);
         }
         accounts.add(account);
+        return account;
     }
     // Метод для получения списка аккаунтов пользователя по его ID
     public List<Account> getAccountsByUserId(int userId) {
