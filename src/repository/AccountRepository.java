@@ -19,7 +19,7 @@ public class AccountRepository {
     private final AtomicInteger currentId = new AtomicInteger(1);
 
     // Метод для добавления нового аккаунта пользователя
-    public void addAccount(int userId, Account account) {
+    public Account addAccount(int userId, Account account) {
         userId = currentId.getAndIncrement();
         List<Account> accounts = userAccountsMap.get(userId);
         if (accounts == null) {
@@ -37,7 +37,7 @@ public class AccountRepository {
         return accounts;
     }
     // Метод для добавления транзакции аккаунта
-    public void addTransaction(int accountId, Transaction transaction) {
+    public Transaction addTransaction(int accountId, Transaction transaction) {
         accountId = currentId.getAndIncrement();
         List<Transaction> transactions = accountsTransactions.get(accountId);
         if (transactions == null) {
@@ -45,6 +45,7 @@ public class AccountRepository {
             accountsTransactions.put(accountId, transactions);
         }
         transactions.add(transaction);
+        return transaction;
     }
     // Метод для получения списка транзакций по ID аккаунта
     public List<Transaction> getTransactionsByAccountId(int accountId) {
