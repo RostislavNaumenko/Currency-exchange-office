@@ -3,6 +3,7 @@ package repository;
 import model.Currency;
 import model.Rate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,4 +14,5 @@ public class CurrencyRepository {
     Map<String, Currency>  currenciesMap;
     // Map для хранения истории курсов валют: ключ - код валюты, значение - список курсов (Rate) для данной валюты
     Map<String, List<Rate>> history;
+
 }

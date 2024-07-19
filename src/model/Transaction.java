@@ -4,14 +4,14 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Transaction {
-    private String id;
+    private Integer id;
     private Account account;
     private double amount;
     private LocalDateTime timestamp;
     private TransactionType type; // DEBIT or CREDIT
     private Currency currency;  // Добавлено поле валюты
 
-    public Transaction(String id, Account account, double amount, LocalDateTime timestamp, TransactionType type, Currency currency) {
+    public Transaction(Integer id, Account account, double amount, LocalDateTime timestamp, TransactionType type, Currency currency) {
         this.id = id;
         this.account = account;
         this.amount = amount;
@@ -21,13 +21,10 @@ public class Transaction {
     }
 
     // Getters and Setters
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public Account getAccount() {
         return account;

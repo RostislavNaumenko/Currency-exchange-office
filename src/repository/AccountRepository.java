@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AccountRepository {
+public class  AccountRepository {
     // Map для хранения аккаунтов пользователей: ключ - ID пользователя, значение - список аккаунтов пользователя
     private Map<Integer, List<Account>> userAccountsMap = new HashMap<>();
 
