@@ -4,15 +4,15 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Transaction {
-    private String id;
+    private int accountId;
     private Account account;
     private double amount;
     private LocalDateTime timestamp;
     private TransactionType type; // DEBIT or CREDIT
     private Currency currency;  // Добавлено поле валюты
 
-    public Transaction(String id, Account account, double amount, LocalDateTime timestamp, TransactionType type, Currency currency) {
-        this.id = id;
+    public Transaction(int accountId, Account account, double amount, LocalDateTime timestamp, TransactionType type, Currency currency) {
+        this.accountId = accountId;
         this.account = account;
         this.amount = amount;
         this.timestamp = timestamp;
@@ -21,12 +21,12 @@ public class Transaction {
     }
 
     // Getters and Setters
-    public String getId() {
-        return id;
+    public int getId() {
+        return accountId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(int id) {
+        this.accountId = id;
     }
 
     public Account getAccount() {
@@ -72,7 +72,7 @@ public class Transaction {
     @Override
     public String toString() {
         return "Transaction{" +
-                "id='" + id + '\'' +
+                "id='" + accountId + '\'' +
                 ", account=" + account +
                 ", amount=" + amount +
                 ", timestamp=" + timestamp +
@@ -85,11 +85,11 @@ public class Transaction {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Transaction that = (Transaction) o;
-        return Double.compare(amount, that.amount) == 0 && Objects.equals(id, that.id) && Objects.equals(account, that.account) && Objects.equals(timestamp, that.timestamp) && type == that.type && Objects.equals(currency, that.currency);
+        return Double.compare(amount, that.amount) == 0 && Objects.equals(accountId, that.accountId) && Objects.equals(account, that.account) && Objects.equals(timestamp, that.timestamp) && type == that.type && Objects.equals(currency, that.currency);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, account, amount, timestamp, type, currency);
+        return Objects.hash(accountId, account, amount, timestamp, type, currency);
     }
 }
