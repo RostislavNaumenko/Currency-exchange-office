@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class AccountRepository {
@@ -15,9 +16,11 @@ public class AccountRepository {
     private Map<Integer, List<Account>> userAccountsMap = new HashMap<>();
     // Map для хранения транзакций аккаунта: ключ - ID аккаунта, значение - список транзакций аккаунта
     private Map<Integer, List<Transaction>> accountsTransactions = new HashMap<>();
+    private final AtomicInteger currentId = new AtomicInteger(1);
 
     // Метод для добавления нового аккаунта пользователя
     public void addAccount(int userId, Account account) {
+        userId = currentId.getAndIncrement();
         List<Account> accounts = userAccountsMap.get(userId);
         if (accounts == null) {
             accounts = new ArrayList<>();
@@ -35,6 +38,7 @@ public class AccountRepository {
     }
     // Метод для добавления транзакции аккаунта
     public void addTransaction(int accountId, Transaction transaction) {
+        accountId = currentId.getAndIncrement();
         List<Transaction> transactions = accountsTransactions.get(accountId);
         if (transactions == null) {
             transactions = new ArrayList<>();
