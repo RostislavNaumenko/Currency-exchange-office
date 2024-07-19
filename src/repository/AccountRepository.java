@@ -1,13 +1,12 @@
 package repository;
 
 import model.Account;
+import model.Currency;
 import model.Transaction;
 import model.User;
+import service.AccountService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
@@ -19,14 +18,15 @@ public class AccountRepository {
     private final AtomicInteger currentId = new AtomicInteger(1);
 
     // Метод для добавления нового аккаунта пользователя
-    public Account addAccount(int userId, Account account) {
-        userId = currentId.getAndIncrement();
-        List<Account> accounts = userAccountsMap.get(userId);
+    public Account addAccount(User user , Currency currency) {
+        int accountId = currentId.getAndIncrement();
+        List<Account> accounts = userAccountsMap.get(user.getId());
+        Account account = new Account(accountId,user,0, currency);
         if (accounts == null) {
             accounts = new ArrayList<>();
-            userAccountsMap.put(userId, accounts);
         }
         accounts.add(account);
+            userAccountsMap.put(user.getId(), accounts);
         return account;
     }
     // Метод для получения списка аккаунтов пользователя по его ID
@@ -39,13 +39,12 @@ public class AccountRepository {
     }
     // Метод для добавления транзакции аккаунта
     public Transaction addTransaction(int accountId, Transaction transaction) {
-        accountId = currentId.getAndIncrement();
         List<Transaction> transactions = accountsTransactions.get(accountId);
         if (transactions == null) {
             transactions = new ArrayList<>();
-            accountsTransactions.put(accountId, transactions);
         }
         transactions.add(transaction);
+            accountsTransactions.put(accountId, transactions);
         return transaction;
     }
     // Метод для получения списка транзакций по ID аккаунта
