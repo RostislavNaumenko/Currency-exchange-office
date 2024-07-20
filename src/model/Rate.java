@@ -3,17 +3,16 @@ package model;
 import java.util.Objects;
 
 public class Rate {
-
     private Currency currency;
     private double rate;
 
     public Rate(Currency currency, double rate) {
-
         this.currency = currency;
         this.rate = rate;
     }
 
-      public Currency getCurrency() {
+
+    public Currency getCurrency() {
         return currency;
     }
 

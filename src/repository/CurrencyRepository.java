@@ -30,6 +30,15 @@ public class CurrencyRepository {
     public Map<String, List<Rate>> getHistory() {
         return history;
     }
+   // Метод для получения текущего курса валюты
+    public Rate getRateForCurrency(String currencyCode) {
+        return currenciesRate.get(currencyCode);
+    }
+
+    // Метод для получения истории курсов валюты
+    public List<Rate> getRateHistoryForCurrency(String currencyCode) {
+        return history.getOrDefault(currencyCode, new ArrayList<>());
+    }
 
     public void addCurrency(String nameOfCurrency, String code) {
         int id = currencyIdCounter.getAndIncrement();
