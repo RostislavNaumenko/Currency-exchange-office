@@ -11,11 +11,11 @@ public class User {
     private String name;
     private String surname;
 
-    public User(Integer userId, String email, String password, Role role, String name, String surname) {
+    public User(Integer userId, String email, String password, String name, String surname) {
         this.userId = userId;
         this.email = email;
         this.password = password;
-        this.role = role;
+        this.role = Role.USER;
         this.name = name;
         this.surname = surname;
     }
