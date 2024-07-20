@@ -4,12 +4,12 @@ import java.util.Objects;
 
 public class Account {
 
-    private String id;
+    private int id;
     private User user;
     private double balance;
     private Currency currency;
 
-    public Account(String id, User user, double balance, Currency currency) {
+    public Account(int id, User user, double balance, Currency currency) {
         this.id = id;
         this.user = user;
         this.balance = balance;
@@ -17,11 +17,11 @@ public class Account {
     }
 
     // Getters and setters
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
