@@ -25,7 +25,6 @@ public class Transaction {
         return id;
     }
 
-
     public Account getAccount() {
         return account;
     }
