@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
-public class AccountRepository {
+public class  AccountRepository {
     // Map для хранения аккаунтов пользователей: ключ - ID пользователя, значение - список аккаунтов пользователя
     private Map<Integer, List<Account>> userAccountsMap = new HashMap<>();
     // Map для хранения транзакций аккаунта: ключ - ID аккаунта, значение - список транзакций аккаунта
