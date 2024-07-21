@@ -37,16 +37,22 @@ public class Account {
         return balance;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
     public Currency getCurrency() {
         return currency;
     }
 
     public void setCurrency(Currency currency) {
         this.currency = currency;
+    }
+
+    // Method to deposit money into the account
+    public void deposit(double amount) {
+        this.balance += amount;
+    }
+
+    // Method to withdraw money from the account
+    public void withdraw(double amount) {
+        this.balance -= amount;
     }
 
     @Override

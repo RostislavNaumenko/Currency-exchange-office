@@ -11,11 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TransactionService {
-    private TransactionRepository transactionRepository;
-
-    public TransactionService(TransactionRepository transactionRepository) {
-        this.transactionRepository = transactionRepository;
-    }
+    private TransactionRepository transactionRepository = new TransactionRepository();
 
     public Transaction createTransaction(Account account, double amount, TransactionType type, Currency currency) {
         return  transactionRepository.addTransaction(account, amount, type, currency);

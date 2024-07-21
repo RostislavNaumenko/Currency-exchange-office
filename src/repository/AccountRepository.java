@@ -15,6 +15,7 @@ public class  AccountRepository {
     private Map<Integer, List<Account>> userAccountsMap = new HashMap<>();
     // Map для хранения транзакций аккаунта: ключ - ID аккаунта, значение - список транзакций аккаунта
     private Map<Integer, List<Transaction>> accountsTransactions = new HashMap<>();
+
     private final AtomicInteger currentId = new AtomicInteger(1);
 
     // Метод для добавления нового аккаунта пользователя
@@ -55,6 +56,31 @@ public class  AccountRepository {
         }
         return transactions;
     }
+    // Вспомогательный метод для поиска аккаунта по его ID
+    public Account getAccountById(int accountId) {
+        for (List<Account> accounts : userAccountsMap.values()) {
+            for (Account account : accounts) {
+                if (account.getId() == accountId) {
+                    return account;
+                }
+            }
+        }
+        return null;
+    }
+
+
+    // Метод для пополнения баланса аккаунта
+    public void deposit(int accountId, double amount) {
+        Account account = getAccountById(accountId);
+        account.deposit(amount);
+    }
+
+    // Метод для снятия денег со счета
+    public void withdraw(int accountId, double amount) {
+        Account account = getAccountById(accountId);
+        account.withdraw(amount);
+    }
+
 }
 
 
