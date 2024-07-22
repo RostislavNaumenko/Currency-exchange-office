@@ -13,9 +13,16 @@ public class UserService {
 
     public User registerUser(String email, String password, String name, String surname) {
         if (!isNameValid(name) || !isEmailValid(email) || userRepository.isEmailExists(email) || !isPasswordValid(password)) {
+            //System.out.println("isNameValid(name) :" + isNameValid(name));
+            // System.out.println("isNameValid(email) :" + isEmailValid(email));
+            //System.out.println("userRepository.isEmailExists(email)) :" + userRepository.isEmailExists(email));
+            // System.out.println("isPasswordValid(password)) :" + isPasswordValid(password));
+
+
             return null;
         }
         User user = userRepository.addUser(email, password, name, surname);
+        System.out.println("user: " + user);
         activeUser = user;
         return user;
     }
@@ -47,7 +54,7 @@ public class UserService {
     }
 
     public User getUserById(int id) {
-       //// if (!activeUser.getRole().equals(Role.ADMIN) || id > userRepository.getAllUsers().size()) return null;
+        // if (!activeUser.getRole().equals(Role.ADMIN) || id > userRepository.getAllUsers().size()) return null;
         return userRepository.getUserById(id);
     }
 
@@ -60,7 +67,6 @@ public class UserService {
 
     public User setUserRole(int id, Role role) {
        // if (id > userRepository.getAllUsers().size() || !activeUser.getRole().equals(Role.ADMIN)) return null;
-
         return userRepository.setUserRole(id, role);
     }
 

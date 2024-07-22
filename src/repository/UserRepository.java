@@ -24,7 +24,8 @@ public class UserRepository {
         return users.values().stream()
                 .filter(user1 -> user1.getEmail().equals(email))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("User not found with email: " + email));
+                .orElse(null);
+
     }
 
     public User setUserRole(int id, Role role){
