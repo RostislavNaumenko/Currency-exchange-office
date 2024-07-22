@@ -2,12 +2,17 @@ package service;
 
 import model.Currency;
 import model.Rate;
+import org.junit.jupiter.api.Test;
 import repository.CurrencyRepository;
 
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 public class CurrencyService {
+
     private CurrencyRepository currencyRepository = new CurrencyRepository();
 
     //Получение валюты по коду
@@ -15,10 +20,14 @@ public class CurrencyService {
         return currencyRepository.getCurrencyByCode(currencyCode);
     }
 
+
+
     // Получение текущего курса валюты по коду
     public Rate getRateForCurrency(String currencyCode) {
         return currencyRepository.getRateForCurrency(currencyCode);
     }
+
+
 
     // Получение истории курсов валюты по коду
     public List<Rate> getRateHistory(String currencyCode) {
@@ -30,6 +39,7 @@ public class CurrencyService {
         currencyRepository.addCurrency(nameOfCurrency, code);
     }
 
+
     // Обновление текущего курса валюты
     public void updateRate(String currencyCode, double rateValue) {
         currencyRepository.updateRate(currencyCode, rateValue);
@@ -40,6 +50,8 @@ public class CurrencyService {
         return currencyRepository.getCurrenciesRate();
     }
 
+
+
     // Получение всех валют
     public Map<String, Currency> getAllCurrencies() {
         return currencyRepository.getCurrenciesMap();
@@ -49,6 +61,9 @@ public class CurrencyService {
     public Map<String, List<Rate>> getAllRateHistories() {
         return currencyRepository.getHistory();
     }
+
+
+
 
 
 }
