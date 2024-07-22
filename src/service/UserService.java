@@ -59,14 +59,14 @@ public class UserService {
     }
 
     public Map<Integer, User> getAllUsers() {
-        // if (activeUser.getRole().equals(Role.ADMIN)) {
-        return userRepository.getAllUsers();
-        // }
-        //  return null;
+       // if (activeUser.getRole().equals(Role.ADMIN)) {
+            return userRepository.getAllUsers();
+       // }
+        //return null;
     }
 
     public User setUserRole(int id, Role role) {
-      //  if (id > userRepository.getAllUsers().size() || !activeUser.getRole().equals(Role.ADMIN)) return null;
+       // if (id > userRepository.getAllUsers().size() || !activeUser.getRole().equals(Role.ADMIN)) return null;
         return userRepository.setUserRole(id, role);
     }
 
