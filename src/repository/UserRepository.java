@@ -45,11 +45,8 @@ public class UserRepository {
     }
 
     public boolean isEmailExists(String email) {
-        Optional<User> user = users.values().stream()
-                .filter(user1 -> user1.getEmail().equalsIgnoreCase(email))
-                .findFirst();
-        return user.isPresent();
-
+        return users.values().stream()
+                .anyMatch(user -> user.getEmail().equalsIgnoreCase(email));
     }
 
 }

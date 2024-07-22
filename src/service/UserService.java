@@ -49,7 +49,6 @@ public class UserService {
     }
 
     // Admin methods (get and set)
-
     public User getUserByEmail(String email) {
         return userRepository.getUserByEmail(email);
     }
@@ -68,7 +67,6 @@ public class UserService {
 
     public User setUserRole(int id, Role role) {
       //  if (id > userRepository.getAllUsers().size() || !activeUser.getRole().equals(Role.ADMIN)) return null;
-
         return userRepository.setUserRole(id, role);
     }
 
