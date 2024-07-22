@@ -4,10 +4,10 @@ import model.Account;
 import model.Currency;
 import model.Transaction;
 import model.User;
-import service.AccountService;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 
 public class  AccountRepository {
@@ -66,6 +66,24 @@ public class  AccountRepository {
             }
         }
         return null;
+    }
+    public List<Transaction> allTransactionsByUser(User user){
+        return userAccountsMap.getOrDefault(user.getId(), Collections.emptyList())
+                .stream()
+                .map(Account::getId)
+                .flatMap(accountId -> accountsTransactions.getOrDefault(accountId, Collections.emptyList()).stream())
+                .collect(Collectors.toList());
+    }
+
+    public List<Account> getAllAccounts(){
+        // Объявляем список для хранения всех аккаунтов
+        List<Account> allAccounts = new ArrayList<>();
+
+        // Проходимся по всем спискам аккаунтов для каждого пользователя
+        for (List<Account> accounts : userAccountsMap.values()) {
+            allAccounts.addAll(accounts); // Добавляем все аккаунты в общий список
+        }
+        return allAccounts;
     }
 
 

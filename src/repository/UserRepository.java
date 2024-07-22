@@ -16,6 +16,7 @@ public class UserRepository {
 
     public User addUser(String email, String password, String name, String surname){
         User user = new User(currentId.getAndIncrement(), email, password, name, surname);
+        users.put(user.getId(), user);
         return user;
     }
 
@@ -43,11 +44,8 @@ public class UserRepository {
     }
 
     public boolean isEmailExists(String email) {
-        Optional<User> user = users.values().stream()
-                .filter(user1 -> user1.getEmail().equalsIgnoreCase(email))
-                .findFirst();
-        return user.isPresent();
-
+        return users.values().stream()
+                .anyMatch(user -> user.getEmail().equalsIgnoreCase(email));
     }
 
 }
