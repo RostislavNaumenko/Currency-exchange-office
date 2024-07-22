@@ -16,6 +16,7 @@ public class UserRepository {
 
     public User addUser(String email, String password, String name, String surname){
         User user = new User(currentId.getAndIncrement(), email, password, name, surname);
+        users.put(user.getId(), user);
         return user;
     }
 
@@ -23,7 +24,8 @@ public class UserRepository {
         return users.values().stream()
                 .filter(user1 -> user1.getEmail().equals(email))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("User not found with email: " + email));
+                .orElse(null);
+
     }
 
     public User setUserRole(int id, Role role){
