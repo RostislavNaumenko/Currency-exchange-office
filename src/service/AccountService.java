@@ -12,20 +12,24 @@ import java.util.List;
 public class AccountService {
     private AccountRepository accountRepository = new AccountRepository();
 
+    //Вспомогательный метод создания аккаунта который будет передавать activeUser
 
     // Метод для добавления нового аккаунта
     public Account addAccount(User user, Currency currency) {
+        //TODO Проверка на уже существование такого аккаунта
         return accountRepository.addAccount(user, currency);
     }
 
     // Метод для получения списка аккаунтов пользователя
     public List<Account> getAccountsByUserId(int userId) {
+        //TODO Проверка существование такого id
         return accountRepository.getAccountsByUserId(userId);
     }
 
 
     // Вспомогательный метод для поиска аккаунта по его ID
     public Account getAccountById(int accountId) {
+        //TODO Проверка существование такого id
         return accountRepository.getAccountById(accountId);
     }
 
