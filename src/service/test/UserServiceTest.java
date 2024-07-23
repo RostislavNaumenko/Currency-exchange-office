@@ -5,6 +5,7 @@ import model.User;
 import org.junit.jupiter.api.Test;
 import service.UserService;
 
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -76,7 +77,7 @@ class UserServiceTest {
         assertEquals(user2, retrievedUser);
 
         // Тест получения всех пользователей (только для администратора)
-        Map<Integer, User> allUsers = userService.getAllUsers();
+        List<User> allUsers = userService.getAllUsers();
         assertNotNull(allUsers);
         assertEquals(3, allUsers.size());
 

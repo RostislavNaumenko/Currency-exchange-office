@@ -20,8 +20,9 @@ public class AdminMenu {
             System.out.println("1 -> Добавление валюты");
             System.out.println("2 -> Обновление курса валюты");
             System.out.println("3 -> Все валюты");
-            System.out.println("4 -> Все пользователи");
-            System.out.println("5 -> Просмотр истории валют");
+            System.out.println("4 -> Просмотр истории валют");
+            System.out.println("5 -> Все пользователи");
+            System.out.println("6 -> Сменить роль пользователю");
             System.out.println("0 -> Возврат в предыдущее меню");
             System.out.println("\nСделайте выбор пункта:");
 
