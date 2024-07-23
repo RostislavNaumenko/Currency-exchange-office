@@ -57,8 +57,16 @@ public class UserMenu {
 
     private void showTransferMenu() {
         System.out.println("ПЕРЕВОДЫ");
+        //Добавить вывод своих аккаунтов
+        //Выбрать с какого аккаунта на какой аккаунт сделать перевод
+        //Узнать сумму
         System.out.println("1 -> Перевод между своими счетами");
         System.out.println("2 -> Перевод на другой аккаунт");
+        //Узнать email кому отправить и вывести его аккаунты
+        //ввести аккаунт на какой переводить
+        //Добавить вывод своих аккаунтов
+        //Выбрать с какого аккаунта на какой аккаунт сделать перевод
+        //Узнать сумму
         System.out.println("0 -> Возврат в предыдущее меню");
 
         System.out.println("\nСделайте выбор пункта:");
@@ -110,16 +118,18 @@ public class UserMenu {
 
         switch (input) {
             case 1:
+                //передать User, и вызвать метод с accountService
                 showAllUserTransactions();
                 break;
             case 2:
+                //вывести все аккаунты, передать id  метод с accountService
                 showAccountTransactions();
                 break;
             default:
                 System.out.println("Некорректный выбор\n");
         }
     }
-
+    //Удалить
     private void showAllUserTransactions() {
         System.out.println("Все транзакции пользователя");
         waitRead();
