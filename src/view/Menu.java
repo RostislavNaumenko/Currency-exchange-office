@@ -1,26 +1,28 @@
 package view;
 
+import model.Account;
 import model.Role;
 import model.User;
-import service.UserService;
+import service.*;
 
 import java.util.Scanner;
 
 public class Menu {
 
-    private final UserService userService;
-    private final UserMenu userMenu;
-    private final AdminMenu adminMenu;
+    private final UserService userService = new UserService();
+    private final AccountService accountService = new AccountService();
+    private final ExchangeService exchangeService = new ExchangeService();
+    private final CurrencyService currencyService = new CurrencyService();
+    private final TransactionService transactionService = new TransactionService();
+    private final UserMenu userMenu = new UserMenu(userService, accountService, transactionService);
+    private final AdminMenu adminMenu = new AdminMenu(currencyService, userService);
 
 
     private User activeUser;
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public Menu(UserMenu userMenu, AdminMenu adminMenu) {
-        this.userService = new UserService();
-        this.userMenu = userMenu;
-        this.adminMenu = adminMenu;
+    public Menu() {
     }
 
     public void run() {
@@ -28,7 +30,7 @@ public class Menu {
     }
     private void showAuthorizationMenu() {
         while (true) {
-            System.out.println("\nДобро пожаловать в Библиотеку\n");
+            System.out.println("\nДобро пожаловать в Обменный пункт валюты\n");
             System.out.println("1 -> Авторизация");
             System.out.println("2 -> Создать нового пользователя");
             System.out.println("0 -> Выход");
@@ -75,12 +77,12 @@ public class Menu {
                 String newPassword = scanner.nextLine();
                 User user = userService.registerUser(newEmail, newPassword, newName, newSurname);
                 if(user == null){
-                    System.out.println("Не корректные данные");
+                    System.out.println("Не корректные данные\n");
                     waitRead();
                     break;
 
                 }else{
-                    System.out.println("Пользователь зарегистрирован!");
+                    System.out.println("Пользователь зарегистрирован!\n");
                     activeUser = userService.getActiveUser();
                     showMainMenu();
                 }
@@ -98,7 +100,6 @@ public class Menu {
             while (true) {
                 System.out.println("Добро пожаловать в меню\n");
                 System.out.println("1 -> Меню администратора");
-                System.out.println("2 -> Меню счетов");
                 System.out.println("3 -> Меню пользователя");
                 System.out.println("0 -> Выход");
                 System.out.println("\nСделайте выбор:");
@@ -109,30 +110,18 @@ public class Menu {
                 if (choice == 0) {
                     System.out.println("До свидания");
                     userService.logout();
-                    System.exit(0);
+                    run();
 
+                } else if (choice == 1) {
+                    adminMenu.showAdminMenu();
+                } else if (choice == 2) {
+                    userMenu.showUserMenu();
                 }
-                //showSubMenuForAdmin(choice);
+
             }
         } else if (activeUser.getRole().equals(Role.USER)) {
-            while (true) {
-                System.out.println("Добро пожаловать в меню\n");
-                System.out.println("2 -> Меню счетов");
-                System.out.println("3 -> Меню пользователя");
-                System.out.println("0 -> Выход");
-                System.out.println("\nСделайте выбор:");
-
-                int choice = scanner.nextInt();
-                scanner.nextLine();
-
-                if (choice == 0) {
-                    System.out.println("До свидания");
-                    userService.logout();
-                    System.exit(0);
-
-                }
-                //showSubMenuForUser(choice);
-            }
+            userMenu.showUserMenu();
+            run();
 
         }
     }

@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Rate {
@@ -23,10 +24,13 @@ public class Rate {
 
     @Override
     public String toString() {
-        return "Rate{" +
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedTimestamp = time.format(formatter);
+
+        return "{\n" +
                 "rate=" + rate +
-                ", time=" + time +
-                '}';
+                ",\n time=" + formattedTimestamp +
+                "\n}";
     }
 
     @Override

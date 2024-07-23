@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class CurrencyRepository {
     // Map для хранения текущего курса валют: ключ - код валюты, значение - объект Rate
@@ -67,8 +68,8 @@ public class CurrencyRepository {
         return currenciesRate;
     }
 
-    public Map<String, Currency> getCurrenciesMap() {
-        return currenciesMap;
+    public List<Currency> getCurrenciesMap() {
+        return currenciesMap.values().stream().collect(Collectors.toList());
     }
 
     public Map<String, List<Rate>> getHistory() {

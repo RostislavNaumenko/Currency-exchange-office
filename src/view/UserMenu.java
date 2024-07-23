@@ -1,16 +1,19 @@
 package view;
 
+import service.AccountService;
 import service.TransactionService;
 import service.UserService;
 import java.util.Scanner;
 
 public class UserMenu {
     private final UserService userService;
+    private final AccountService accountService;
     private final TransactionService transactionService;
     private final Scanner scanner = new Scanner(System.in);
 
-    public UserMenu(UserService userService, TransactionService transactionService) {
+    public UserMenu(UserService userService, AccountService accountService, TransactionService transactionService) {
         this.userService = userService;
+        this.accountService = accountService;
         this.transactionService = transactionService;
     }
 
@@ -21,14 +24,18 @@ public class UserMenu {
             System.out.println("2 -> Переводы");
             System.out.println("3 -> Просмотр аккаунта");
             System.out.println("4 -> История транзакций");
-            System.out.println("0 -> Возврат в предыдущее меню");
+            System.out.println("0 -> Выход");
 
             System.out.println("\nСделайте выбор пункта:");
 
             int input = scanner.nextInt();
             scanner.nextLine();
-            if (input == 0)
+            if (input == 0){
+                System.out.println("До свидания");
+                userService.logout();
                 break;
+
+            }
 
             handleUserMenuChoice(input);
         }

@@ -9,23 +9,28 @@ import java.util.stream.Collectors;
 
 public class UserRepository {
     // Map для хранения пользователей: ключ - ID пользователя, значение - объект User
-    private Map<Integer, User> users = new HashMap<>();
+    private Map<Integer, User> users;
     private final AtomicInteger currentId = new AtomicInteger(1);
 
+    public UserRepository(){
+        this.users = new HashMap<>();
+        initUsersTestData();
+
+    }
     private void initUsersTestData() {
 
         User admin = new User(currentId.getAndIncrement(), "1", "1", "1", "1");
         admin.setRole(Role.ADMIN);
-        List<User> userList = new ArrayList<>();
-        userList.addAll(new ArrayList<>(List.of(
+        users.put(admin.getId(), admin);
+        List<User> userList = Arrays.asList(
                 new User(currentId.getAndIncrement(), "test@email.net", "qwerty!Q1", "Vitan", "Volys"),
                 new User(currentId.getAndIncrement(), "admin@email.net", "admin!Q1", "Oleksandr", "Petrov"),
                 new User(currentId.getAndIncrement(), "user2@email.net", "qwerty!Q1", "Rosty", "Basko"),
                 new User(currentId.getAndIncrement(), "user3@email.net", "qwerty!Q1", "Olga", "Tur"),
-                new User(currentId.getAndIncrement(), "2", "2", "2", "2"),
-                admin
+                new User(currentId.getAndIncrement(), "2", "2", "2", "2")
+        );
 
-        )));
+        userList.forEach(user -> users.put(user.getId(), user));
     }
 
     public User addUser(String email, String password, String name, String surname){

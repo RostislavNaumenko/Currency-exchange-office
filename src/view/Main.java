@@ -10,7 +10,9 @@ import service.TransactionService;
 import service.UserService;
 
 public class Main {
+
     public static void main(String[] args) {
+        final Menu menu = new Menu();
         UserRepository userRepository = new UserRepository();
         CurrencyRepository currencyRepository = new CurrencyRepository();
         TransactionRepository transactionRepository = new TransactionRepository();
@@ -18,11 +20,7 @@ public class Main {
         UserService userService = new UserService();
         CurrencyService currencyService = new CurrencyService();
         TransactionService transactionService = new TransactionService();
-
-        UserMenu userMenu = new UserMenu(userService, transactionService);
-        AdminMenu adminMenu = new AdminMenu(currencyService, userService);
-
-        Menu menu = new Menu(userMenu, adminMenu);
         menu.run();
+
     }
 }
