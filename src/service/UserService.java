@@ -4,6 +4,7 @@ import model.Role;
 import model.User;
 import repository.UserRepository;
 
+import java.util.List;
 import java.util.Map;
 
 public class UserService {
@@ -58,7 +59,7 @@ public class UserService {
         return userRepository.getUserById(id);
     }
 
-    public Map<Integer, User> getAllUsers() {
+    public List<User> getAllUsers() {
        // if (activeUser.getRole().equals(Role.ADMIN)) {
             return userRepository.getAllUsers();
        // }

@@ -54,13 +54,13 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", role=" + role +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                '}';
+        return "{\n id= " + userId +
+                ",\n email='" + email + '\'' +
+                ",\n password='" + password + '\'' +
+                ",\n role=" + role +
+                ",\n name='" + name + '\'' +
+                ",\n surname='" + surname + '\'' +
+                "\n}";
     }
 
     @Override

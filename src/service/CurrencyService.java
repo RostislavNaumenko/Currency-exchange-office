@@ -41,7 +41,7 @@ public class CurrencyService {
     }
 
     // Получение всех валют
-    public Map<String, Currency> getAllCurrencies() {
+    public List<Currency> getAllCurrencies() {
         return currencyRepository.getCurrenciesMap();
     }
 

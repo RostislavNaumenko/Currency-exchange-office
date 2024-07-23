@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Transaction {
@@ -67,13 +68,16 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" +
-                "id='" + id + '\'' +
-                ", account=" + account +
-                ", amount=" + amount +
-                ", timestamp=" + timestamp +
-                ", type=" + type +
-                '}';
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedTimestamp = timestamp.format(formatter);
+
+        return "{\n" +
+                "\n id='" + id + '\'' +
+                ",\n account=" + account +
+                ",\n amount=" + amount +
+                ",\n timestamp=" + formattedTimestamp +
+                ",\n type=" + type +
+                "\n}";
     }
 
     @Override

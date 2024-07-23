@@ -23,10 +23,10 @@ public class Currency {
 
     @Override
     public String toString() {
-        return "Currency{" +
-                ", nameOfCurrency='" + nameOfCurrency + '\'' +
-                ", abbreviation='" + code + '\'' +
-                '}';
+        return "{" +
+                "\n title='" + nameOfCurrency + '\'' +
+                ",\n abbreviation='" + code + '\'' +
+                "\n}";
     }
 
     @Override
