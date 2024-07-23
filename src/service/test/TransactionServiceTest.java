@@ -1,59 +1,78 @@
 package service.test;
 
 import model.Role;
+import model.Account;
+import model.Currency;
+import model.Transaction;
+import model.TransactionType;
 import model.User;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.UserService;
+import repository.TransactionRepository;
+import service.TransactionService;
 
 import java.util.Map;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TransactionServiceTest {
 
-    @Test
-    public void testRegisterUser() {
-        UserService userService = new UserService();
+    private TransactionService transactionService;
+    private Account account;
+    private Currency currency;
 
-        // Тест успешной регистрации
-        User user1 = userService.registerUser("test@example.com", "Password123!", "John", "Doe");
-        assertNotNull(user1);
-        assertEquals("test@example.com", user1.getEmail());
-        assertEquals("John", user1.getName());
-        assertEquals("Doe", user1.getSurname());
-
-        // Тест регистрации с невалидным email
-        User user2 = userService.registerUser("invalid_email", "Password123!", "Jane", "Smith");
-        assertNull(user2);
-
-        // Тест регистрации с невалидным паролем
-        User user3 = userService.registerUser("test2@example.com", "weak", "Bob", "Johnson");
-        assertNull(user3);
-
-        // Тест регистрации с существующим email
-        User user4 = userService.registerUser("test@example.com", "Password456!", "Alice", "Williams");
-        assertNull(user4);
+    @BeforeEach
+    void setUp() {
+        transactionService = new TransactionService();
+        currency = new Currency("USD", "US Dollar");
+        account = new Account(1, new User(1, "test@example.com", "password", "John", "Smith"), 1000.0, currency);
     }
 
     @Test
-    public void testAuthenticate() {
-        UserService userService = new UserService();
-
-        // Тест успешной аутентификации
-        userService.registerUser("test@example.com", "Password123!", "John", "Doe");
-        boolean isAuthenticated = userService.authenticate("test@example.com", "Password123!");
-        assertTrue(isAuthenticated);
-
-        // Тест аутентификации с неверным email
-        isAuthenticated = userService.authenticate("wrong@example.com", "Password123!");
-        System.out.println("isAuthenticated : " + isAuthenticated);
-        assertFalse(isAuthenticated);
-
-        // Тест аутентификации с неверным паролем
-        isAuthenticated = userService.authenticate("test@example.com", "WrongPassword");
-        assertFalse(isAuthenticated);
+    void createTransaction() {
+        Transaction transaction = transactionService.createTransaction(account, 100.0, TransactionType.DEBIT, currency);
+        assertNotNull(transaction);
+        assertEquals(100.0, transaction.getAmount());
+        assertEquals(TransactionType.DEBIT, transaction.getType());
+        assertEquals(currency, transaction.getCurrency());
+        assertEquals(account, transaction.getAccount());
     }
 
+    @Test
+    void getTransactionById() {
+        Transaction transaction = transactionService.createTransaction(account, 100.0, TransactionType.DEBIT, currency);
+        Transaction retrievedTransaction = transactionService.getTransactionById(transaction.getId());
+        assertNotNull(retrievedTransaction);
+        assertEquals(transaction, retrievedTransaction);
+    }
+
+    @Test
+    void getAllTransactions() {
+        transactionService.createTransaction(account, 100.0, TransactionType.DEBIT, currency);
+        transactionService.createTransaction(account, 50.0, TransactionType.CREDIT, currency);
+        List<Transaction> allTransactions = transactionService.getAllTransactions();
+        assertEquals(2, allTransactions.size());
+    }
+
+    @Test
+    void getTransactionsByAccount() {
+        transactionService.createTransaction(account, 100.0, TransactionType.DEBIT, currency);
+        transactionService.createTransaction(account, 50.0, TransactionType.CREDIT, currency);
+        List<Transaction> transactions = transactionService.getTransactionsByAccount(account);
+        assertEquals(2, transactions.size());
+    }
+
+    @Test
+    void getTransactionsByAccountAndType() {
+        transactionService.createTransaction(account, 100.0, TransactionType.DEBIT, currency);
+        transactionService.createTransaction(account, 50.0, TransactionType.CREDIT, currency);
+        List<Transaction> debitTransactions = transactionService.getTransactionsByAccountAndType(account, TransactionType.DEBIT);
+        assertEquals(1, debitTransactions.size());
+        List<Transaction> creditTransactions = transactionService.getTransactionsByAccountAndType(account, TransactionType.CREDIT);
+        assertEquals(1, creditTransactions.size());
+    }
 
 }
 
